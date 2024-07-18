@@ -15,18 +15,11 @@ btns.forEach(btn => {
     btns.forEach(btn => btn.classList.remove('active'));
     e.target.classList.add('active');
 
-    // set id of input field
-    if (character == 'Wendy') {
-        input.innerText = '2 pounds!'
-    } else if (character == 'Yudu') {
-        input.innerText = '200 pounds!'
-    } else {
-        input.innerText = '0 pounds!'
-    }
-
-    // set text of form span (the character)
     formAct.textContent = character;
 
-    update(data)
+    var weight_gain = update(data)
+    input.innerText = String(weight_gain) +  ' pounds!'
+    update2(data2)
+
   });
 });
