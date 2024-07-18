@@ -1,5 +1,5 @@
 const margin = { top: 20, right: 20, bottom: 50, left: 80 };
-const graphWidth = 560 - margin.right - margin.left;
+const graphWidth = 500 - margin.right - margin.left;
 const graphHeight = 360 - margin.top - margin.bottom;
 
 const svg = d3.select('.canvas')
@@ -50,8 +50,13 @@ const yDottedLine = dottedLines.append('line')
   .attr('stroke-width', 1)
   .attr('stroke-dasharray', 4);
 
+
+const annotation = svg.append("text").attr("class","annotation hidden")
+
 // update function
 const update = (data) => {
+
+  annotation.classed("hidden",true);
 
   // filter data based on current character
   data = data.filter(item => item.character == character);
@@ -115,6 +120,16 @@ const update = (data) => {
         .attr('y2', y(d.weight));
       // show the dotted line group (opacity)
       dottedLines.style('opacity', 100);
+
+      annotation
+      .attr('x',x(new Date(d.date)))
+      .attr('y',y(d.weight))
+      .classed("hidden",false);
+
+      annotation.select("img").attr("src",'img1.PNG')
+
+      annotation.text('this is test')
+
     })
     .on('mouseleave', (d,i,n) => {
       d3.select(n[i])
@@ -122,7 +137,10 @@ const update = (data) => {
         .attr('r', 4)
         .attr('fill', '#E3CB8F');
       // hide the dotted line group (opacity)
-      dottedLines.style('opacity', 0)
+      dottedLines.style('opacity', 0);
+      
+      annotation.classed("hidden",true);
+
     });
 
   // create axes
@@ -152,78 +170,92 @@ var data = [
     {
         date : new Date("2023-07-01"),
         weight: 105,
-        character: 'Wendy'
+        character: 'Wendy',
+        happinesslevel:1
     },
     {
         date : new Date("2023-09-06"),
         weight: 110,
-        character: 'Wendy'
+        character: 'Wendy',
+        happinesslevel:1
+
     },
     {
         date : new Date("2023-12-12"),
         weight: 115,
-        character: 'Wendy'
+        character: 'Wendy',
+        happinesslevel:3
     },
     {
         date : new Date("2024-02-05"),
         weight: 120,
-        character: 'Wendy'
+        character: 'Wendy',
+        happinesslevel:4
     },
     {
         date : new Date("2024-05-25"),
         weight: 110,
-        character: 'Wendy'
+        character: 'Wendy',
+        happinesslevel:5
     },
     {
         date : new Date("2023-07-01"),
         weight: 178,
-        character: 'Yudu'
+        character: 'Yudu',
+        happinesslevel:1
     },
     {
         date : new Date("2023-09-06"),
         weight: 180,
-        character: 'Yudu'
+        character: 'Yudu',
+        happinesslevel:2
     },
     {
         date : new Date("2023-12-12"),
         weight: 190,
-        character: 'Yudu'
+        character: 'Yudu',
+        happinesslevel:1
     },
     {
         date : new Date("2024-02-05"),
         weight: 180,
-        character: 'Yudu'
+        character: 'Yudu',
+        happinesslevel:3
     },
     {
         date : new Date("2024-05-25"),
         weight: 175,
-        character: 'Yudu'
+        character: 'Yudu',
+        happinesslevel:4
     },    
     {
         date : new Date("2023-07-01"),
         weight: 10,
-        character: 'Potato'
+        character: 'Potato',
+        happinesslevel:1
     },
     {
         date : new Date("2023-09-06"),
         weight: 10,
-        character: 'Potato'
+        character: 'Potato',
+        happinesslevel:1
     },
     {
         date : new Date("2023-12-12"),
         weight: 10,
-        character: 'Potato'
+        character: 'Potato',
+        happinesslevel:1
     },
     {
         date : new Date("2024-02-05"),
         weight: 10,
-        character: 'Potato'
+        character: 'Potato',
+        happinesslevel:1
     },
     {
         date : new Date("2024-05-25"),
         weight: 10,
-        character: 'Potato'
+        character: 'Potato',
+        happinesslevel:1
     },        
 ];
-
-update(data);

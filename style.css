@@ -23,3 +23,22 @@ button{
   form span{
     color: 	#ADAAA1 !important;
   }
+  .hidden {
+    display: none;
+  }
+  .annotation {
+    position:relative;
+    text-align: center;
+    width: 100px;
+    height: 120px;
+    padding: 2px;
+    font: sans-serif;
+    background: #ADAAA1;
+    border: 1px solid #aaa;
+    border-radius: 8px;
+    pointer-events: none;
+  }
+
+  .annotation img {
+    width: 100%;
+  }

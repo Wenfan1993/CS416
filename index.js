@@ -19,7 +19,7 @@ btns.forEach(btn => {
 
     var weight_gain = update(data)
     input.innerText = String(weight_gain) +  ' pounds!'
-    update2(data2)
+    update2(data)
 
   });
 });
