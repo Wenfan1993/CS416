@@ -1,0 +1,23 @@
+.nav{
+    background: #d1aca0
+  }
+
+button{
+    background: #d1aca0 !important;
+    margin-bottom: 20px;
+    width: 100%;
+    padding: 16px;
+    font-size: 1.6em;
+    color: #a04f53;
+    border: 0;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  button.active{
+    background: #bc7f6e !important;
+  }
+  
+  form span{
+    color: 	#bc7f6e !important;
+  }
