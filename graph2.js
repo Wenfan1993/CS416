@@ -47,6 +47,7 @@ const yDottedLine2 = dottedLines2.append('line')
   .attr('stroke-width', 1)
   .attr('stroke-dasharray', 4);
 
+const annotation2 = svg2.append("text").attr("class","annotation")
 // update function
 const update2 = (data2) => {
 
@@ -55,9 +56,18 @@ const update2 = (data2) => {
   // sort the data based on date objects
   data2.sort((a,b) => new Date(a.date) - new Date(b.date));
 
+  data2.length>0?graph2.append("text")
+  .attr("x", (graphWidth / 2))
+  .attr("y", 0) // Position the title above the chart
+  .attr("text-anchor", "middle")
+  .attr("fill","#aaa")
+  .style('font-weight','bold')
+  .style('font-size','20')  
+  .text("The Happiness Level Change"):null
+
   // set scale domains
-  x2.domain(d3.extent(data2, d => new Date(d.date)));
-  y2.domain([0, 5]);
+  x2.domain(d3.extent([new Date('2023-01-01'),new Date('2024-12-31')]));
+  y2.domain([0, 7]);
 
   // update path data
   path2.data([data2])
@@ -107,6 +117,37 @@ const update2 = (data2) => {
         .attr('y2', y2(d.happinesslevel));
       // show the dotted line group (opacity)
       dottedLines2.style('opacity', 100);
+
+      annotation2
+            .attr('x',x2(new Date(d.date)))
+            .attr('y',y2(d.happinesslevel))
+            .attr('class','annotation')
+            .classed("hidden",false);
+        
+      const lineHeight = 20
+      var annotationText = `${formatDate(d.date)}\n${d.weight} lb.\nhappiness level ${d.happinesslevel}`
+      var lines = annotationText.split('\n');
+      lines.forEach((line, i) => {
+        annotation2.append("tspan")
+                    .attr('x',x2(new Date(d.date)))
+                    .attr("dy", i === 0 ? 0 : lineHeight) // Shift subsequent lines down
+                    .attr("text-anchor", "middle")
+                    .text(line)});
+    
+    //   document.addEventListener('mousemove', function(e) {
+    //     const floatingBox = document.getElementById('floating-box');
+    //     const floatImage = floatingBox.querySelector('img')
+    //     const mouseX = e.clientX;
+    //     const mouseY = e.clientY;
+    
+    //     // Offset the box slightly so it doesn't overlap the cursor
+    //     const offsetX = 20;
+    //     const offsetY = 20;
+    //     floatImage.src = d.image;
+    //     floatingBox.style.left = (mouseX + offsetX) + 'px';
+    //     floatingBox.style.top = (mouseY + offsetY) + 'px';
+    //     floatingBox.style.display = 'block'; // Make sure the box is visible
+    // });
     })
     .on('mouseleave', (d,i,n) => {
       d3.select(n[i])
@@ -115,6 +156,24 @@ const update2 = (data2) => {
         .attr('fill', '#E3CB8F');
       // hide the dotted line group (opacity)
       dottedLines2.style('opacity', 0)
+      annotation2.classed("hidden",true);
+      annotation2.selectAll("tspan").remove()
+
+
+    //   document.addEventListener('mousemove', function(e) {
+    //     const floatingBox = document.getElementById('floating-box');
+    //     const mouseX = e.clientX;
+    //     const mouseY = e.clientY;
+    
+    //     // Offset the box slightly so it doesn't overlap the cursor
+    //     const offsetX = 20;
+    //     const offsetY = 20;
+    //     floatingBox.style.left = (mouseX + offsetX) + 'px';
+    //     floatingBox.style.top = (mouseY + offsetY) + 'px';
+    //     floatingBox.style.display = null; // Make sure the box is visible
+
+  
+    // });
     });
 
   // create axes
@@ -123,8 +182,8 @@ const update2 = (data2) => {
     .tickFormat(d3.timeFormat("%b %d %Y"));
     
   const yAxis2 = d3.axisLeft(y2)
-    .ticks(4)
-    .tickFormat(d => d + ' level');
+    .ticks(7)
+    .tickFormat(d => d<=5?d + ' level':'');
 
   // call axes
   xAxisGroup2.call(xAxis2);

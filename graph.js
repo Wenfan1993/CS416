@@ -1,11 +1,20 @@
-const margin = { top: 20, right: 20, bottom: 50, left: 80 };
+const margin = { top: 20, right: 10, bottom: 50, left: 80 };
 const graphWidth = 500 - margin.right - margin.left;
 const graphHeight = 360 - margin.top - margin.bottom;
+
+function formatDate(date) {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are zero-indexed
+    const day = String(date.getDate()).padStart(2, '0');
+    
+    return `${year}-${month}-${day}`;
+}
 
 const svg = d3.select('.canvas')
   .append('svg')
   .attr('width', graphWidth + margin.left + margin.right)
   .attr('height', graphHeight + margin.top + margin.bottom);
+
 
 const graph = svg.append('g')
   .attr('width', graphWidth)
@@ -51,12 +60,10 @@ const yDottedLine = dottedLines.append('line')
   .attr('stroke-dasharray', 4);
 
 
-const annotation = svg.append("text").attr("class","annotation hidden")
+const annotation = svg.append("text").attr("class","annotation")
 
 // update function
 const update = (data) => {
-
-  annotation.classed("hidden",true);
 
   // filter data based on current character
   data = data.filter(item => item.character == character);
@@ -64,13 +71,23 @@ const update = (data) => {
   var weight_gain = data.length>0?data[data.length - 1].weight - data[0].weight:0
   console.log('weight_gain', weight_gain)
 
+  data.length>0?graph.append("text")
+  .attr("x", (graphWidth / 2))
+  .attr("y", 0) // Position the title above the chart
+  .attr("text-anchor", "middle")
+  .attr("fill","#aaa")
+  .style('font-weight','bold')
+  .style('font-size','20')
+  .text("The Weight Change"):null
+
+
   // sort the data based on date objects
   data.sort((a,b) => new Date(a.date) - new Date(b.date));
 //   var max_weight = data? data[data.length - 1].weight - data[0].weight:0
 
   // set scale domains
-  x.domain(d3.extent(data, d => new Date(d.date)));
-  y.domain([5, 200]);
+  x.domain(d3.extent([new Date('2023-01-01'),new Date('2024-12-31')]));
+  y.domain([5, 240]);
 
   // update path data
   path.data([data])
@@ -122,15 +139,24 @@ const update = (data) => {
       dottedLines.style('opacity', 100);
 
       annotation
-      .attr('x',x(new Date(d.date)))
-      .attr('y',y(d.weight))
-      .classed("hidden",false);
-
-      annotation.select("img").attr("src",'img1.PNG')
-
-      annotation.text('this is test')
-
+            .attr('x',x(new Date(d.date)))
+            .attr('y',y(d.weight)+10)
+            .attr('class','annotation')
+            .classed("hidden",false);
+        
+      const lineHeight = 20
+      const width = 100
+      var annotationText = `${formatDate(d.date)}\n${d.weight} lb.\nhappiness level ${d.happinesslevel}`
+      var lines = annotationText.split('\n');
+      lines.forEach((line, i) => {
+                annotation.append("tspan")
+                    .attr('x',x(new Date(d.date)))
+                    .attr("dy", i === 0 ? 0 : lineHeight) // Shift subsequent lines down
+                    .attr("text-anchor", "middle")
+                    .text(line)});
+    
     })
+
     .on('mouseleave', (d,i,n) => {
       d3.select(n[i])
         .transition().duration(100)
@@ -140,7 +166,7 @@ const update = (data) => {
       dottedLines.style('opacity', 0);
       
       annotation.classed("hidden",true);
-
+      annotation.selectAll("tspan").remove()
     });
 
   // create axes
@@ -171,7 +197,8 @@ var data = [
         date : new Date("2023-07-01"),
         weight: 105,
         character: 'Wendy',
-        happinesslevel:1
+        happinesslevel:1,
+        image:'img2.PNG'
     },
     {
         date : new Date("2023-09-06"),

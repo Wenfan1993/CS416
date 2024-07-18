@@ -2,7 +2,8 @@
     background:#E3CB8F
   }
 .main-body{
-    background: #f7efde
+    background: #f7efde;
+    color: #aaa;    
 }
 button{
     background: #f0ebe0!important;
@@ -26,19 +27,30 @@ button{
   .hidden {
     display: none;
   }
+
   .annotation {
-    position:relative;
-    text-align: center;
-    width: 100px;
-    height: 120px;
-    padding: 2px;
-    font: sans-serif;
-    background: #ADAAA1;
-    border: 1px solid #aaa;
-    border-radius: 8px;
-    pointer-events: none;
+            font-family: Arial, sans-serif;
+            font-size: 16px;
+            font-weight: bold;
+            fill: #A9A9A9; /* Font color */
+            z-index: 10;
+            border: 2;
+            border-radius: 4px;
+        }
+
+  .annotation-bg {
+            fill: white; /* Background color */
+        }
+
+  #floating-box {
+    position: absolute;
+    display: none; /* Start hidden */
+    pointer-events: none; /* Ensure the box doesn't interfere with mouse events */
   }
 
-  .annotation img {
-    width: 100%;
-  }
+  #floating-box img {
+    width: 200px; /* Adjust size as needed */
+    height: auto;
+    border: 2px solid #aaa;
+    border-radius: 5px;
+ }
