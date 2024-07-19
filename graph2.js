@@ -134,20 +134,20 @@ const update2 = (data2) => {
                     .attr("text-anchor", "middle")
                     .text(line)});
     
-    //   document.addEventListener('mousemove', function(e) {
-    //     const floatingBox = document.getElementById('floating-box');
-    //     const floatImage = floatingBox.querySelector('img')
-    //     const mouseX = e.clientX;
-    //     const mouseY = e.clientY;
+      document.addEventListener('mousemove', function(e) {
+        const floatingBox = document.getElementById('floating-box');
+        const floatImage = floatingBox.querySelector('img')
+        const mouseX = e.clientX;
+        const mouseY = e.clientY;
     
-    //     // Offset the box slightly so it doesn't overlap the cursor
-    //     const offsetX = 20;
-    //     const offsetY = 20;
-    //     floatImage.src = d.image;
-    //     floatingBox.style.left = (mouseX + offsetX) + 'px';
-    //     floatingBox.style.top = (mouseY + offsetY) + 'px';
-    //     floatingBox.style.display = 'block'; // Make sure the box is visible
-    // });
+        // Offset the box slightly so it doesn't overlap the cursor
+        const offsetX = 20;
+        const offsetY = 20;
+        floatImage.src = d.img;
+        floatingBox.style.left = (mouseX + offsetX) + 'px';
+        floatingBox.style.top = (mouseY + offsetY) + 'px';
+        floatingBox.style.display = 'block'; // Make sure the box is visible
+    });
     })
     .on('mouseleave', (d,i,n) => {
       d3.select(n[i])
@@ -160,20 +160,20 @@ const update2 = (data2) => {
       annotation2.selectAll("tspan").remove()
 
 
-    //   document.addEventListener('mousemove', function(e) {
-    //     const floatingBox = document.getElementById('floating-box');
-    //     const mouseX = e.clientX;
-    //     const mouseY = e.clientY;
+      document.addEventListener('mousemove', function(e) {
+        const floatingBox = document.getElementById('floating-box');
+        const mouseX = e.clientX;
+        const mouseY = e.clientY;
     
-    //     // Offset the box slightly so it doesn't overlap the cursor
-    //     const offsetX = 20;
-    //     const offsetY = 20;
-    //     floatingBox.style.left = (mouseX + offsetX) + 'px';
-    //     floatingBox.style.top = (mouseY + offsetY) + 'px';
-    //     floatingBox.style.display = null; // Make sure the box is visible
+        // Offset the box slightly so it doesn't overlap the cursor
+        const offsetX = 20;
+        const offsetY = 20;
+        floatingBox.style.left = (mouseX + offsetX) + 'px';
+        floatingBox.style.top = (mouseY + offsetY) + 'px';
+        floatingBox.style.display = null; // Make sure the box is visible
 
   
-    // });
+    });
     });
 
   // create axes
