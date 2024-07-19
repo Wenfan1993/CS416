@@ -19,7 +19,7 @@ btns.forEach(btn => {
     // formAct.textContent = character;
     var data3 = []
 
-    d3.csv("https://wenfan1993.github.io/CS416/weight_happiness_data.csv").then(function(data) {
+    d3.csv("https://wenfan1993.github.io/CS416/src/weight_happiness_data.csv").then(function(data) {
         // Log the parsed data to the console
     
         // Example: Process the data
