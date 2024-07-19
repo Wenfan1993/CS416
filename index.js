@@ -1,8 +1,8 @@
 const btns = document.querySelectorAll('button');
 const form = document.querySelector('form');
 const formAct = document.querySelector('form span');
-const input = document.getElementById('weightdisplay')
 const input2 = document.getElementById('happinessdisplay')
+const input3 = document.getElementById('conclusion')
 const error = document.querySelector('.error');
 
 var character = 'Wendy';
@@ -39,12 +39,18 @@ btns.forEach(btn => {
         console.log('data3',data3)
         var weight_gain = update(data3)
         var isHappy = update2(data3)
-        input.innerText = 'How much weight ' + character + ' has gained? ' + String(weight_gain) +  ' pounds!'
         if (isHappy){
-            input2.innerText = 'Is ' + character + ' more happy? Yes!'
+            input2.innerHTML = 'How much weight ' + character + ' has gained? ' + String(weight_gain) +  ' pounds!<br>Is ' + character + ' more happy? Yes!'
         } else {
-            input2.innerText = 'Is ' + character + ' more happy? No...'
+            input2.innerHTML = 'How much weight ' + character + ' has gained? ' + String(weight_gain) +  ' pounds!<br>Is ' + character + ' more happy? No...'
         }
+        if (isHappy && weight_gain>0){
+            input3.innerText = 'Looks like for ' + character + ', happiness gained him/her weight'
+        } else if (isHappy && weight_gain<0){
+            input3.innerText = 'Looks like for ' + character + ', happiness did not gain him/her weight'
+        }
+
+        
 
     }).catch(function(error) {
         // Handle any errors
