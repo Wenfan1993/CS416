@@ -193,4 +193,7 @@ const update2 = (data2) => {
   xAxisGroup2.selectAll('text')
     .attr('transform', 'rotate(-40)')
     .attr('text-anchor', 'end');
+
+  var is_happier = data2.length>0?data2[data2.length - 1].happinesslevel > data2[0].happinesslevel:false
+  return is_happier
 };

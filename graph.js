@@ -92,7 +92,7 @@ const update = (data) => {
   // update path data
   path.data([data])
     .attr('fill', 'none')
-    .attr('stroke', '#00bfa5')
+    .attr('stroke', '#aaa')
     .attr('stroke-width', '2')
     .attr('d', line);
 
@@ -258,31 +258,31 @@ var data = [
     {
         date : new Date("2023-07-01"),
         weight: 10,
-        character: 'Potato',
+        character: 'Pika',
         happinesslevel:1
     },
     {
         date : new Date("2023-09-06"),
         weight: 10,
-        character: 'Potato',
+        character: 'Pika',
         happinesslevel:1
     },
     {
         date : new Date("2023-12-12"),
         weight: 10,
-        character: 'Potato',
+        character: 'Pika',
         happinesslevel:1
     },
     {
         date : new Date("2024-02-05"),
         weight: 10,
-        character: 'Potato',
+        character: 'Pika',
         happinesslevel:1
     },
     {
         date : new Date("2024-05-25"),
         weight: 10,
-        character: 'Potato',
+        character: 'Pika',
         happinesslevel:1
     },        
 ];
