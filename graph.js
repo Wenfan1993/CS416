@@ -87,7 +87,7 @@ const update = (data) => {
 
   // set scale domains
   x.domain(d3.extent([new Date('2023-01-01'),new Date('2024-12-31')]));
-  y.domain([5, 240]);
+  y.domain([0, 240]);
 
   // update path data
   path.data([data])
@@ -154,7 +154,21 @@ const update = (data) => {
                     .attr("dy", i === 0 ? 0 : lineHeight) // Shift subsequent lines down
                     .attr("text-anchor", "middle")
                     .text(line)});
-    
+
+        document.addEventListener('mousemove', function(e) {
+                        const floatingBox = document.getElementById('floating-box');
+                        const floatImage = floatingBox.querySelector('img')
+                        const mouseX = e.clientX;
+                        const mouseY = e.clientY;
+                    
+                        // Offset the box slightly so it doesn't overlap the cursor
+                        const offsetX = 20;
+                        const offsetY = 20;
+                        floatImage.src = d.img;
+                        floatingBox.style.left = (mouseX + offsetX) + 'px';
+                        floatingBox.style.top = (mouseY + offsetY) + 'px';
+                        floatingBox.style.display = 'block'; // Make sure the box is visible
+                    });    
     })
 
     .on('mouseleave', (d,i,n) => {
@@ -167,6 +181,21 @@ const update = (data) => {
       
       annotation.classed("hidden",true);
       annotation.selectAll("tspan").remove()
+
+      document.addEventListener('mousemove', function(e) {
+        const floatingBox = document.getElementById('floating-box');
+        const mouseX = e.clientX;
+        const mouseY = e.clientY;
+    
+        // Offset the box slightly so it doesn't overlap the cursor
+        const offsetX = 20;
+        const offsetY = 20;
+        floatingBox.style.left = (mouseX + offsetX) + 'px';
+        floatingBox.style.top = (mouseY + offsetY) + 'px';
+        floatingBox.style.display = null; // Make sure the box is visible
+
+  
+    });      
     });
 
   // create axes
@@ -192,98 +221,98 @@ const update = (data) => {
 };
 
 // data and firestore
-var data = [
-    {
-        date : new Date("2023-07-01"),
-        weight: 105,
-        character: 'Wendy',
-        happinesslevel:1,
-        image:'img2.PNG'
-    },
-    {
-        date : new Date("2023-09-06"),
-        weight: 110,
-        character: 'Wendy',
-        happinesslevel:1
+// var data = [
+//     {
+//         date : new Date("2023-07-01"),
+//         weight: 105,
+//         character: 'Wendy',
+//         happinesslevel:1,
+//         image:'img2.PNG'
+//     },
+//     {
+//         date : new Date("2023-09-06"),
+//         weight: 110,
+//         character: 'Wendy',
+//         happinesslevel:1
 
-    },
-    {
-        date : new Date("2023-12-12"),
-        weight: 115,
-        character: 'Wendy',
-        happinesslevel:3
-    },
-    {
-        date : new Date("2024-02-05"),
-        weight: 120,
-        character: 'Wendy',
-        happinesslevel:4
-    },
-    {
-        date : new Date("2024-05-25"),
-        weight: 110,
-        character: 'Wendy',
-        happinesslevel:5
-    },
-    {
-        date : new Date("2023-07-01"),
-        weight: 178,
-        character: 'Yudu',
-        happinesslevel:1
-    },
-    {
-        date : new Date("2023-09-06"),
-        weight: 180,
-        character: 'Yudu',
-        happinesslevel:2
-    },
-    {
-        date : new Date("2023-12-12"),
-        weight: 190,
-        character: 'Yudu',
-        happinesslevel:1
-    },
-    {
-        date : new Date("2024-02-05"),
-        weight: 180,
-        character: 'Yudu',
-        happinesslevel:3
-    },
-    {
-        date : new Date("2024-05-25"),
-        weight: 175,
-        character: 'Yudu',
-        happinesslevel:4
-    },    
-    {
-        date : new Date("2023-07-01"),
-        weight: 10,
-        character: 'Pika',
-        happinesslevel:1
-    },
-    {
-        date : new Date("2023-09-06"),
-        weight: 10,
-        character: 'Pika',
-        happinesslevel:1
-    },
-    {
-        date : new Date("2023-12-12"),
-        weight: 10,
-        character: 'Pika',
-        happinesslevel:1
-    },
-    {
-        date : new Date("2024-02-05"),
-        weight: 10,
-        character: 'Pika',
-        happinesslevel:1
-    },
-    {
-        date : new Date("2024-05-25"),
-        weight: 10,
-        character: 'Pika',
-        happinesslevel:1
-    },        
-];
+//     },
+//     {
+//         date : new Date("2023-12-12"),
+//         weight: 115,
+//         character: 'Wendy',
+//         happinesslevel:3
+//     },
+//     {
+//         date : new Date("2024-02-05"),
+//         weight: 120,
+//         character: 'Wendy',
+//         happinesslevel:4
+//     },
+//     {
+//         date : new Date("2024-05-25"),
+//         weight: 110,
+//         character: 'Wendy',
+//         happinesslevel:5
+//     },
+//     {
+//         date : new Date("2023-07-01"),
+//         weight: 178,
+//         character: 'Yudu',
+//         happinesslevel:1
+//     },
+//     {
+//         date : new Date("2023-09-06"),
+//         weight: 180,
+//         character: 'Yudu',
+//         happinesslevel:2
+//     },
+//     {
+//         date : new Date("2023-12-12"),
+//         weight: 190,
+//         character: 'Yudu',
+//         happinesslevel:1
+//     },
+//     {
+//         date : new Date("2024-02-05"),
+//         weight: 180,
+//         character: 'Yudu',
+//         happinesslevel:3
+//     },
+//     {
+//         date : new Date("2024-05-25"),
+//         weight: 175,
+//         character: 'Yudu',
+//         happinesslevel:4
+//     },    
+//     {
+//         date : new Date("2023-07-01"),
+//         weight: 10,
+//         character: 'Pika',
+//         happinesslevel:1
+//     },
+//     {
+//         date : new Date("2023-09-06"),
+//         weight: 10,
+//         character: 'Pika',
+//         happinesslevel:1
+//     },
+//     {
+//         date : new Date("2023-12-12"),
+//         weight: 10,
+//         character: 'Pika',
+//         happinesslevel:1
+//     },
+//     {
+//         date : new Date("2024-02-05"),
+//         weight: 10,
+//         character: 'Pika',
+//         happinesslevel:1
+//     },
+//     {
+//         date : new Date("2024-05-25"),
+//         weight: 10,
+//         character: 'Pika',
+//         happinesslevel:1
+//     },        
+// ];
 
