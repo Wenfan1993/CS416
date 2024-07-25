@@ -72,14 +72,14 @@ const update2 = (data2) => {
 
   circles2.exit().remove();
 
-  circles2.attr('r', '4')
+  circles2.attr('r',  (d, i, n) => {console.log(d,i,n); return '4'})
     .attr('cx', d => x2(new Date(d.date)))
     .attr('cy', d => y2(d.happinesslevel));
 
 
   circles2.enter()
     .append('circle')
-      .attr('r', '4')
+      .attr('r',  (d, i, n) => {(i>0)&&(i<6)?'4':'8'})
       .attr('cx', d => x2(new Date(d.date)))
       .attr('cy', d => y2(d.happinesslevel))
       .attr('fill', '#E3CB8F');
