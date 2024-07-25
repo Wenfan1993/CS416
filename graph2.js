@@ -182,7 +182,7 @@ const update2 = (data2) => {
     .attr('id','annot-reomve-t')
     .attr("x", x2(firstDataPoint2.date) + 25)
         .attr("y", y2(firstDataPoint2.happinesslevel) - 25)
-        .text(`Happiness Level: ${firstDataPoint2.happinesslevel}`)
+        .text(`Start Happiness Level: ${firstDataPoint2.happinesslevel}`)
         .style("font-size", "12px")
         .style("font-weight", "bold")
         .style("fill", "black");
@@ -212,9 +212,9 @@ const update2 = (data2) => {
     
     graph2.append("text")
     .attr('id','annot-reomve-t2')
-        .attr("x", x2(lastDataPoint2.date) - 90)
+        .attr("x", x2(lastDataPoint2.date) - 120)
         .attr("y", y2(lastDataPoint2.happinesslevel) - 50)
-        .text(`Happiness Level: ${lastDataPoint2.happinesslevel}`)
+        .text(`End Happiness Level: ${lastDataPoint2.happinesslevel}`)
         .style("font-size", "12px")
         .style("font-weight", "bold")
         .style("fill", "black");
