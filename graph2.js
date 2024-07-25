@@ -173,7 +173,7 @@ const update2 = (data2) => {
         .attr("x1", x2(firstDataPoint2.date))
         .attr("y1", y2(firstDataPoint2.happinesslevel))
         .attr("x2", x2(firstDataPoint2.date) + 20)
-        .attr("y2", y2(firstDataPoint2.happinesslevel) + 20)
+        .attr("y2", y2(firstDataPoint2.happinesslevel) - 20)
         .attr("stroke", "black")
         .attr("stroke-width", 1.5)
         .attr('id','annot-reomve-l');
@@ -181,7 +181,7 @@ const update2 = (data2) => {
     graph2.append("text")
     .attr('id','annot-reomve-t')
     .attr("x", x2(firstDataPoint2.date) + 25)
-        .attr("y", y2(firstDataPoint2.happinesslevel) + 25)
+        .attr("y", y2(firstDataPoint2.happinesslevel) - 25)
         .text(`Happiness Level: ${firstDataPoint2.happinesslevel}`)
         .style("font-size", "12px")
         .style("fill", "black");
@@ -204,18 +204,26 @@ const update2 = (data2) => {
     .attr('id','annot-reomve-l2')
         .attr("x1", x2(lastDataPoint2.date))
         .attr("y1", y2(lastDataPoint2.happinesslevel))
-        .attr("x2", x2(lastDataPoint2.date) - 20)
+        .attr("x2", x2(lastDataPoint2.date) - 35)
         .attr("y2", y2(lastDataPoint2.happinesslevel) - 20)
         .attr("stroke", "black")
         .attr("stroke-width", 1.5);
     
     graph2.append("text")
     .attr('id','annot-reomve-t2')
-        .attr("x", x2(lastDataPoint2.date) - 25)
-        .attr("y", y2(lastDataPoint2.happinesslevel) - 25)
+        .attr("x", x2(lastDataPoint2.date) - 40)
+        .attr("y", y2(lastDataPoint2.happinesslevel) - 50)
         .text(`Happiness Level: ${lastDataPoint2.happinesslevel}`)
         .style("font-size", "12px")
         .style("fill", "black");
+    
+    graph2.append("text")
+        .attr('id','annot-reomve-t2')
+            .attr("x", x2(lastDataPoint2.date) - 40)
+            .attr("y", y2(lastDataPoint2.happinesslevel) - 35)
+            .text(`${parseInt(lastDataPoint2.happinesslevel)>parseInt(firstDataPoint2.happinesslevel)?'Increased:':'Decreased'} ${lastDataPoint2.happinesslevel-firstDataPoint2.happinesslevel}`)
+            .style("font-size", "12px")
+            .style("fill", "black");        
     
     graph2.append("defs").append("marker")
         .attr("id", "annot-reomve-d2")

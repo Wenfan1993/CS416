@@ -40,15 +40,10 @@ btns.forEach(btn => {
         console.log('data3',data3)
         var weight_gain = update(data3)
         var isHappy = update2(data3)
-        if (isHappy){
-            input2.innerHTML = 'How much weight ' + character + ' has gained? ' + String(weight_gain) +  ' pounds!<br>Is ' + character + ' more happy? Yes!'
-        } else {
-            input2.innerHTML = 'How much weight ' + character + ' has gained? ' + String(weight_gain) +  ' pounds!<br>Is ' + character + ' more happy? No...'
-        }
         if (isHappy && weight_gain>0){
-            input3.innerText = 'Looks like for ' + character + ', happiness gained him/her weight'
+            input2.innerText = 'Looks like for ' + character + ', happiness gained him/her weight'
         } else if (isHappy && weight_gain<0){
-            input3.innerText = 'Looks like for ' + character + ', happiness did not gain him/her weight'
+            input2.innerText = 'Looks like for ' + character + ', happiness did not gain him/her weight'
         }
 
         
