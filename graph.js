@@ -202,7 +202,7 @@ const update = (data) => {
     .attr('id','annot-reomve-t')
     .attr("x", x(firstDataPoint.date) + 25)
         .attr("y", y(firstDataPoint.weight) - 25)
-        .text(`Weight: ${firstDataPoint.weight}`)
+        .text(`Start Weight: ${firstDataPoint.weight}`)
         .style("font-size", "12px")
         .style("font-weight", "bold")
         .style("fill", "black");
@@ -232,16 +232,16 @@ const update = (data) => {
     
     graph.append("text")
     .attr('id','annot-reomve-t2')
-        .attr("x", x(lastDataPoint.date) - 70)
+        .attr("x", x(lastDataPoint.date) - 100)
         .attr("y", y(lastDataPoint.weight) - 40)
-        .text(`Weight: ${lastDataPoint.weight}`)
+        .text(`End Weight: ${lastDataPoint.weight}`)
         .style("font-size", "12px")
         .style("font-weight", "bold")
         .style("fill", "black");
 
       graph.append("text")
         .attr('id','annot-reomve-t2')
-           .attr("x", x(lastDataPoint.date) - 70)
+           .attr("x", x(lastDataPoint.date) - 100)
           .attr("y", y(lastDataPoint.weight) - 25)
           .text(`${parseInt(lastDataPoint.weight)>parseInt(firstDataPoint.weight)?'Increased:':'Decreased'} ${lastDataPoint.weight-firstDataPoint.weight}`)
           .style("font-size", "12px")
