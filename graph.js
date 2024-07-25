@@ -57,6 +57,9 @@ const annotation = svg.append("text").attr("class","annotation")
 
 
 const update = (data) => {
+  const maxIndex = Math.max(...data.map(d => d.index))
+  const minIndex = Math.min(...data.map(d => d.index))
+  console.log('index', maxIndex, minIndex)
   graph.selectAll("#annot-reomve-l").remove()
   graph.selectAll("#annot-reomve-t").remove()
   graph.selectAll("#annot-reomve-d").remove()
@@ -97,13 +100,13 @@ const update = (data) => {
   circles.exit().remove();
 
 
-  circles.attr('r', d => (d.index>1)&&(d.index<56)?'4':'8')
+  circles.attr('r', d => (d.index>minIndex)&&(d.index<maxIndex)?'4':'8')
     .attr('cx', d => x(new Date(d.date)))
     .attr('cy', d => y(d.weight));
 
   circles.enter()
     .append('circle')
-      .attr('r', d => (d.index>1)&&(d.index<56)?'4':'8')
+      .attr('r', d => (d.index>minIndex)&&(d.index<maxIndex)?'4':'8')
       .attr('cx', d => x(new Date(d.date)))
       .attr('cy', d => y(d.weight))
       .attr('fill', '#E3CB8F');
@@ -165,7 +168,7 @@ const update = (data) => {
     .on('mouseleave', (d,i,n) => {
       d3.select(n[i])
         .transition().duration(100)
-        .attr('r', d => (d.index>1)&&(d.index<56)?'4':'8')
+        .attr('r', d => (d.index>minIndex)&&(d.index<maxIndex)?'4':'8')
         .attr('fill', '#E3CB8F');
       dottedLines.style('opacity', 0);
       
