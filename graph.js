@@ -97,13 +97,13 @@ const update = (data) => {
   circles.exit().remove();
 
 
-  circles.attr('r', d => (d.index>1)&&(d.index<7)?'4':'8')
+  circles.attr('r', d => (d.index>1)&&(d.index<56)?'4':'8')
     .attr('cx', d => x(new Date(d.date)))
     .attr('cy', d => y(d.weight));
 
   circles.enter()
     .append('circle')
-      .attr('r', d => (d.index>1)&&(d.index<7)?'4':'8')
+      .attr('r', d => (d.index>1)&&(d.index<56)?'4':'8')
       .attr('cx', d => x(new Date(d.date)))
       .attr('cy', d => y(d.weight))
       .attr('fill', '#E3CB8F');
