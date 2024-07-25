@@ -44,7 +44,13 @@ const yDottedLine2 = dottedLines2.append('line')
 const annotation2 = svg2.append("text").attr("class","annotation")
 
 const update2 = (data2) => {
-
+  graph2.selectAll("#annot-reomve-l").remove()
+  graph2.selectAll("#annot-reomve-t").remove()
+  graph2.selectAll("#annot-reomve-d").remove()
+  graph2.selectAll("#annot-reomve-l2").remove()
+  graph2.selectAll("#annot-reomve-t2").remove()
+  graph2.selectAll("#annot-reomve-d2").remove()
+  
   // filter data based on current character
   data2 = data2.filter(item => item.character == character);
   data2.sort((a,b) => new Date(a.date) - new Date(b.date));
@@ -72,14 +78,14 @@ const update2 = (data2) => {
 
   circles2.exit().remove();
 
-  circles2.attr('r',  (d, i, n) => {console.log(d,i,n); return '4'})
+  circles2.attr('r', d => (d.index>1)&&(d.index<7)?'4':'8')
     .attr('cx', d => x2(new Date(d.date)))
     .attr('cy', d => y2(d.happinesslevel));
 
 
   circles2.enter()
     .append('circle')
-      .attr('r',  (d, i, n) => {(i>0)&&(i<6)?'4':'8'})
+      .attr('r', d => (d.index>1)&&(d.index<7)?'4':'8')
       .attr('cx', d => x2(new Date(d.date)))
       .attr('cy', d => y2(d.happinesslevel))
       .attr('fill', '#E3CB8F');
@@ -138,7 +144,7 @@ const update2 = (data2) => {
     .on('mouseleave', (d,i,n) => {
       d3.select(n[i])
         .transition().duration(100)
-        .attr('r', 4)
+        .attr('r', d => (d.index>1)&&(d.index<7)?'4':'8')
         .attr('fill', '#E3CB8F');
 
       dottedLines2.style('opacity', 0)
@@ -160,6 +166,69 @@ const update2 = (data2) => {
 
     });
     });
+
+    const firstDataPoint2 = data2[0];
+
+    graph2.append("line")
+        .attr("x1", x2(firstDataPoint2.date))
+        .attr("y1", y2(firstDataPoint2.happinesslevel))
+        .attr("x2", x2(firstDataPoint2.date) + 20)
+        .attr("y2", y2(firstDataPoint2.happinesslevel) + 20)
+        .attr("stroke", "black")
+        .attr("stroke-width", 1.5)
+        .attr('id','annot-reomve-l');
+    
+    graph2.append("text")
+    .attr('id','annot-reomve-t')
+    .attr("x", x2(firstDataPoint2.date) + 25)
+        .attr("y", y2(firstDataPoint2.happinesslevel) + 25)
+        .text(`Happiness Level: ${firstDataPoint2.happinesslevel}`)
+        .style("font-size", "12px")
+        .style("fill", "black");
+    
+    graph2.append("defs").append("marker")
+        .attr("id", "annot-reomve-d")
+        .attr("viewBox", "0 0 10 10")
+        .attr("refX", 5)
+        .attr("refY", 5)
+        .attr("markerWidth", 6)
+        .attr("markerHeight", 6)
+        .attr("orient", "auto-start-reverse")
+        .append("path")
+        .attr("d", "M 0 0 L 10 5 L 0 10 z")
+        .attr("fill", "black");    
+
+    const lastDataPoint2 = data2[data2.length - 1];
+
+    graph2.append("line")
+    .attr('id','annot-reomve-l2')
+        .attr("x1", x2(lastDataPoint2.date))
+        .attr("y1", y2(lastDataPoint2.happinesslevel))
+        .attr("x2", x2(lastDataPoint2.date) - 20)
+        .attr("y2", y2(lastDataPoint2.happinesslevel) - 20)
+        .attr("stroke", "black")
+        .attr("stroke-width", 1.5);
+    
+    graph2.append("text")
+    .attr('id','annot-reomve-t2')
+        .attr("x", x2(lastDataPoint2.date) - 25)
+        .attr("y", y2(lastDataPoint2.happinesslevel) - 25)
+        .text(`Happiness Level: ${lastDataPoint2.happinesslevel}`)
+        .style("font-size", "12px")
+        .style("fill", "black");
+    
+    graph2.append("defs").append("marker")
+        .attr("id", "annot-reomve-d2")
+        .attr("viewBox", "0 0 10 10")
+        .attr("refX", 5)
+        .attr("refY", 5)
+        .attr("markerWidth", 6)
+        .attr("markerHeight", 6)
+        .attr("orient", "auto-start-reverse")
+        .append("path")
+        .attr("d", "M 0 0 L 10 5 L 0 10 z")
+        .attr("fill", "black");    
+
 
 
   const xAxis2 = d3.axisBottom(x2)
