@@ -144,7 +144,7 @@ const update2 = (data2) => {
     .on('mouseleave', (d,i,n) => {
       d3.select(n[i])
         .transition().duration(100)
-        .attr('r', d => (d.index>1)&&(d.index<7)?'4':'8')
+        .attr('r', d => (d.index>1)&&(d.index<56)?'4':'8')
         .attr('fill', '#E3CB8F');
 
       dottedLines2.style('opacity', 0)
