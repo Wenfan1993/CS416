@@ -13,6 +13,9 @@ btns.forEach(btn => {
   btn.addEventListener('click', e => {
     // get character
     character = e.target.dataset.character;
+    document.getElementById("startDate").value = null;
+    document.getElementById("endDate").value = null;
+    
 
     // remove and add active class
     btns.forEach(btn => btn.classList.remove('active'));
@@ -56,8 +59,8 @@ btns.forEach(btn => {
 });
 
 btnF.addEventListener('click', e => {  
-    const startDate = new Date(document.getElementById("startDate").value);
-    const endDate = new Date(document.getElementById("endDate").value);
+    const startDate = document.getElementById("startDate").value?new Date(document.getElementById("startDate").value):null;
+    const endDate = document.getElementById("endDate").value?new Date(document.getElementById("endDate").value):null;
     var data3 = []
     d3.csv("https://wenfan1993.github.io/CS416/src/weight_happiness_data.csv").then(function(data) {
         // Log the parsed data to the console
@@ -77,13 +80,21 @@ btnF.addEventListener('click', e => {
         }));
         // data3 = data
 
-        console.log('data3',data3)
-        const filteredData = data3.filter(d => d.date >= startDate && d.date <= endDate);
-        var weight_gain = update(filteredData)
-        var isHappy = update2(filteredData)
-        if (isHappy && weight_gain>0){
+        console.log('data3 here',data3)
+        console.log('startDate here',startDate)
+        console.log('endDate here',endDate)        
+        const startDateUse = startDate?startDate:data3[0].date
+        const endDateUse = endDate?endDate:data3[data3.length-1].date
+        console.log('startDateUse here',startDateUse)
+        console.log('startDateUse here',endDateUse)        
+        const filteredData = data3.filter(d => d.date >= startDateUse && d.date <= endDateUse);
+        console.log('filteredData here',filteredData)
+        var weight_gain_new = update(filteredData)
+        var isHappy_new = update2(filteredData)
+        console.log()
+        if (isHappy_new && weight_gain_new>0){
             input2.innerText = 'Looks like for ' + character + ', happiness gained him/her weight'
-        } else if (isHappy && weight_gain<0){
+        } else {
             input2.innerText = 'Looks like for ' + character + ', happiness did not gain him/her weight'
         }
     }).catch(function(error) {
