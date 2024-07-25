@@ -32,7 +32,8 @@ btns.forEach(btn => {
             weight: d.weight,
             happinesslevel:d.happinesslevel,
             date:new Date(d.date),
-            img:d.img
+            img:d.img,
+            index:d.index
         }));
         // data3 = data
 

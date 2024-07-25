@@ -57,7 +57,13 @@ const annotation = svg.append("text").attr("class","annotation")
 
 
 const update = (data) => {
-
+  graph.selectAll("#annot-reomve-l").remove()
+  graph.selectAll("#annot-reomve-t").remove()
+  graph.selectAll("#annot-reomve-d").remove()
+  graph.selectAll("#annot-reomve-l2").remove()
+  graph.selectAll("#annot-reomve-t2").remove()
+  graph.selectAll("#annot-reomve-d2").remove()
+  
   // filter data based on current character
   data = data.filter(item => item.character == character);
   console.log('data', data)
@@ -91,13 +97,13 @@ const update = (data) => {
   circles.exit().remove();
 
 
-  circles.attr('r', '4')
+  circles.attr('r', d => (d.index>1)&&(d.index<7)?'4':'8')
     .attr('cx', d => x(new Date(d.date)))
     .attr('cy', d => y(d.weight));
 
   circles.enter()
     .append('circle')
-      .attr('r', '4')
+      .attr('r', d => (d.index>1)&&(d.index<7)?'4':'8')
       .attr('cx', d => x(new Date(d.date)))
       .attr('cy', d => y(d.weight))
       .attr('fill', '#E3CB8F');
@@ -159,7 +165,7 @@ const update = (data) => {
     .on('mouseleave', (d,i,n) => {
       d3.select(n[i])
         .transition().duration(100)
-        .attr('r', 4)
+        .attr('r', d => (d.index>1)&&(d.index<7)?'4':'8')
         .attr('fill', '#E3CB8F');
       dottedLines.style('opacity', 0);
       
@@ -180,6 +186,68 @@ const update = (data) => {
   
     });      
     });
+
+    const firstDataPoint = data[0];
+
+    graph.append("line")
+        .attr("x1", x(firstDataPoint.date))
+        .attr("y1", y(firstDataPoint.weight))
+        .attr("x2", x(firstDataPoint.date) + 20)
+        .attr("y2", y(firstDataPoint.weight) + 20)
+        .attr("stroke", "black")
+        .attr("stroke-width", 1.5)
+        .attr('id','annot-reomve-l');
+    
+    graph.append("text")
+    .attr('id','annot-reomve-t')
+    .attr("x", x(firstDataPoint.date) + 25)
+        .attr("y", y(firstDataPoint.weight) + 25)
+        .text(`Weight: ${firstDataPoint.weight}`)
+        .style("font-size", "12px")
+        .style("fill", "black");
+    
+    graph.append("defs").append("marker")
+        .attr("id", "annot-reomve-d")
+        .attr("viewBox", "0 0 10 10")
+        .attr("refX", 5)
+        .attr("refY", 5)
+        .attr("markerWidth", 6)
+        .attr("markerHeight", 6)
+        .attr("orient", "auto-start-reverse")
+        .append("path")
+        .attr("d", "M 0 0 L 10 5 L 0 10 z")
+        .attr("fill", "black");    
+
+    const lastDataPoint = data[data.length - 1];
+
+    graph.append("line")
+    .attr('id','annot-reomve-l2')
+        .attr("x1", x(lastDataPoint.date))
+        .attr("y1", y(lastDataPoint.weight))
+        .attr("x2", x(lastDataPoint.date) - 20)
+        .attr("y2", y(lastDataPoint.weight) - 20)
+        .attr("stroke", "black")
+        .attr("stroke-width", 1.5);
+    
+    graph.append("text")
+    .attr('id','annot-reomve-t2')
+        .attr("x", x(lastDataPoint.date) - 25)
+        .attr("y", y(lastDataPoint.weight) - 25)
+        .text(`Weight: ${lastDataPoint.weight}`)
+        .style("font-size", "12px")
+        .style("fill", "black");
+    
+    graph.append("defs").append("marker")
+        .attr("id", "annot-reomve-d2")
+        .attr("viewBox", "0 0 10 10")
+        .attr("refX", 5)
+        .attr("refY", 5)
+        .attr("markerWidth", 6)
+        .attr("markerHeight", 6)
+        .attr("orient", "auto-start-reverse")
+        .append("path")
+        .attr("d", "M 0 0 L 10 5 L 0 10 z")
+        .attr("fill", "black");    
 
   // create axes
   const xAxis = d3.axisBottom(x)
