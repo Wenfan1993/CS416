@@ -184,6 +184,7 @@ const update2 = (data2) => {
         .attr("y", y2(firstDataPoint2.happinesslevel) - 25)
         .text(`Happiness Level: ${firstDataPoint2.happinesslevel}`)
         .style("font-size", "12px")
+        .style("font-weight", "bold")
         .style("fill", "black");
     
     graph2.append("defs").append("marker")
@@ -211,18 +212,20 @@ const update2 = (data2) => {
     
     graph2.append("text")
     .attr('id','annot-reomve-t2')
-        .attr("x", x2(lastDataPoint2.date) - 40)
+        .attr("x", x2(lastDataPoint2.date) - 90)
         .attr("y", y2(lastDataPoint2.happinesslevel) - 50)
         .text(`Happiness Level: ${lastDataPoint2.happinesslevel}`)
         .style("font-size", "12px")
+        .style("font-weight", "bold")
         .style("fill", "black");
     
     graph2.append("text")
         .attr('id','annot-reomve-t2')
-            .attr("x", x2(lastDataPoint2.date) - 40)
+            .attr("x", x2(lastDataPoint2.date) - 70)
             .attr("y", y2(lastDataPoint2.happinesslevel) - 35)
             .text(`${parseInt(lastDataPoint2.happinesslevel)>parseInt(firstDataPoint2.happinesslevel)?'Increased:':'Decreased'} ${lastDataPoint2.happinesslevel-firstDataPoint2.happinesslevel}`)
             .style("font-size", "12px")
+            .style("font-weight", "bold")
             .style("fill", "black");        
     
     graph2.append("defs").append("marker")

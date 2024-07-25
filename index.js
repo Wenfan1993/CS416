@@ -26,7 +26,7 @@ btns.forEach(btn => {
     
         // Example: Process the data
         data.forEach(d => {
-            console.log(`Name: ${d.character}, weight: ${d.weight}, img: ${d.img} date:${new Date(d.date)}`);
+            console.log(`index: ${d.index}, weight: ${d.weight}, img: ${d.img} date:${new Date(d.date)}`);
         });
 
         data.forEach(d => data3.push({
