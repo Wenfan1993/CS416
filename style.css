@@ -20,7 +20,27 @@ button{
   button.active{
     background: #E3CB8F !important;
   }
-  
+
+  .filterButton{
+    background: #f0ebe0!important;
+    margin-bottom: 20px;
+    width: 100%;
+    padding: 16px;
+    font-size: 1.6em;
+    color: #ADAAA1;
+    border: 0;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  .filterButton:hover{
+    background: #E3CB8F !important;
+  }
+
+  .filterButton.active{
+    background: #ADAAA1
+  }
+
   form span{
     color: 	#ADAAA1 !important;
   }
